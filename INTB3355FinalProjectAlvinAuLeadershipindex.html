@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leadership Reflection | INTB 3355 | Alvin</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0d1b2a;
+      --blue:   #1b4f72;
+      --accent: #2e86c1;
+      --gold:   #d4ac0d;
+      --light:  #f0f4f8;
+      --white:  #ffffff;
+      --text:   #1a1a2e;
+      --muted:  #5a6a7a;
+      --radius: 12px;
+      --shadow: 0 8px 32px rgba(0,0,0,.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.75;
+    }
+
+    /* ── Navbar ──────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(13,27,42,.95);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+    }
+
+    .nav-brand {
+      color: var(--gold);
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,.8);
+      text-decoration: none;
+      font-size: .85rem;
+      font-family: 'Arial', sans-serif;
+      letter-spacing: .5px;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── Hero ────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, #1a6fa8 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.04);
+      top: -150px; right: -150px;
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(212,172,13,.06);
+      bottom: -100px; left: -100px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(212,172,13,.15);
+      color: var(--gold);
+      border: 1px solid rgba(212,172,13,.4);
+      padding: 6px 20px;
+      border-radius: 40px;
+      font-size: .78rem;
+      font-family: 'Arial', sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    #hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      color: var(--white);
+      line-height: 1.15;
+      max-width: 780px;
+      margin-bottom: 20px;
+    }
+
+    #hero h1 span { color: var(--gold); }
+
+    #hero p.hero-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,.72);
+      max-width: 600px;
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .hero-meta-item {
+      text-align: center;
+    }
+
+    .hero-meta-item .label {
+      font-size: .7rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+      font-family: 'Arial', sans-serif;
+    }
+
+    .hero-meta-item .value {
+      font-size: .95rem;
+      color: rgba(255,255,255,.85);
+      font-family: 'Arial', sans-serif;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,.4);
+      font-family: 'Arial', sans-serif;
+      font-size: .72rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-hint::after {
+      content: '↓';
+      font-size: 1.2rem;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── Sections ────────────────────────────────────── */
+    section {
+      padding: 90px 5%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    section.full-width {
+      max-width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(46,134,193,.1);
+      color: var(--accent);
+      border: 1px solid rgba(46,134,193,.25);
+      padding: 4px 14px;
+      border-radius: 40px;
+      font-size: .72rem;
+      font-family: 'Arial', sans-serif;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    section h2 {
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      color: var(--navy);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .section-rule {
+      width: 56px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+
+    section p {
+      font-size: 1.05rem;
+      color: #2c3e50;
+      margin-bottom: 18px;
+      max-width: 820px;
+    }
+
+    section p:last-child { margin-bottom: 0; }
+
+    /* ── Alternating bg sections ─────────────────────── */
+    .bg-light { background: var(--light); }
+    .bg-navy  { background: var(--navy); }
+
+    .bg-light section, .bg-navy section { max-width: 100%; padding: 90px 8%; }
+    .bg-light section > *, .bg-navy section > * { max-width: 980px; }
+
+    .bg-navy h2, .bg-navy p, .bg-navy .section-tag { color: var(--white); }
+    .bg-navy .section-tag {
+      background: rgba(212,172,13,.15);
+      border-color: rgba(212,172,13,.35);
+      color: var(--gold);
+    }
+    .bg-navy p { color: rgba(255,255,255,.78); }
+    .bg-navy .section-rule { background: var(--gold); }
+
+    /* ── Card Grid ───────────────────────────────────── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 26px;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--accent);
+      transition: transform .25s;
+    }
+
+    .card:hover { transform: translateY(-4px); }
+
+    .card.gold-top { border-top-color: var(--gold); }
+    .card.green-top { border-top-color: #27ae60; }
+    .card.purple-top { border-top-color: #8e44ad; }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+
+    /* ── Article Pull-Quote / Callout ────────────────── */
+    .callout {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      margin: 40px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .callout::before {
+      content: '\201C';
+      position: absolute;
+      top: -20px; left: 20px;
+      font-size: 10rem;
+      color: rgba(255,255,255,.06);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .callout p {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: rgba(255,255,255,.9);
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .callout cite {
+      font-size: .82rem;
+      color: var(--gold);
+      letter-spacing: .5px;
+      font-style: normal;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* ── Article Insight Boxes ───────────────────────── */
+    .insight-box {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      background: #f7fafc;
+      border-left: 5px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 22px 24px;
+      margin: 28px 0;
+    }
+
+    .insight-box.gold { border-left-color: var(--gold); }
+
+    .insight-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .insight-box h4 {
+      font-size: .8rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-family: 'Arial', sans-serif;
+      margin-bottom: 6px;
+    }
+
+    .insight-box.gold h4 { color: #b7950b; }
+
+    .insight-box p {
+      font-size: .97rem;
+      color: #2c3e50;
+      margin-bottom: 0;
+    }
+
+    /* ── Skills Progress ─────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      margin-top: 36px;
+    }
+
+    .skill-item { }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .skill-name {
+      font-size: .95rem;
+      font-weight: bold;
+      color: var(--navy);
+      font-family: 'Arial', sans-serif;
+    }
+
+    .skill-label-before, .skill-label-after {
+      font-size: .75rem;
+      font-family: 'Arial', sans-serif;
+      color: var(--muted);
+    }
+
+    .progress-track {
+      height: 8px;
+      background: #dde3ea;
+      border-radius: 40px;
+      overflow: visible;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: 40px;
+      position: relative;
+    }
+
+    .progress-before {
+      background: #b0bec5;
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      border-radius: 40px;
+      z-index: 1;
+    }
+
+    .progress-after {
+      background: linear-gradient(90deg, var(--accent), #27ae60);
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      border-radius: 40px;
+      z-index: 2;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: .72rem;
+      color: var(--muted);
+      font-family: 'Arial', sans-serif;
+      margin-top: 4px;
+    }
+
+    /* ── Timeline ────────────────────────────────────── */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+      margin-top: 36px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--gold));
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 36px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 6px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .timeline-item.gold::before { background: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+    .timeline-item.green::before { background: #27ae60; box-shadow: 0 0 0 2px #27ae60; }
+
+    .timeline-label {
+      font-size: .72rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-family: 'Arial', sans-serif;
+      margin-bottom: 4px;
+    }
+
+    .timeline-item.gold .timeline-label { color: #b7950b; }
+    .timeline-item.green .timeline-label { color: #1e8449; }
+
+    .timeline-item h3 {
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .timeline-item p {
+      font-size: .97rem;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    /* ── Article Reference Cards ─────────────────────── */
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-top: 36px;
+    }
+
+    .article-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .article-card .source {
+      font-size: .72rem;
+      font-family: 'Arial', sans-serif;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .article-card h3 {
+      font-size: 1.1rem;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .article-card .author {
+      font-size: .85rem;
+      color: var(--muted);
+      font-family: 'Arial', sans-serif;
+    }
+
+    .article-card p {
+      font-size: .95rem;
+      color: #4a5568;
+      margin-bottom: 0;
+      line-height: 1.65;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: var(--light);
+      color: var(--accent);
+      border: 1px solid rgba(46,134,193,.2);
+      padding: 3px 12px;
+      border-radius: 40px;
+      font-size: .75rem;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* ── Growth Banner ───────────────────────────────── */
+    .growth-banner {
+      background: linear-gradient(135deg, #0d1b2a 0%, #1b4f72 100%);
+      border-radius: var(--radius);
+      padding: 50px;
+      text-align: center;
+      margin: 50px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .growth-banner::before {
+      content: '✦';
+      position: absolute;
+      top: 20px; right: 30px;
+      font-size: 4rem;
+      color: rgba(212,172,13,.1);
+    }
+
+    .growth-banner h2 {
+      color: var(--white);
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .growth-banner p {
+      color: rgba(255,255,255,.72);
+      font-size: 1.05rem;
+      max-width: 680px;
+      margin: 0 auto 28px;
+    }
+
+    .growth-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .growth-stat .num {
+      font-size: 2.4rem;
+      font-weight: bold;
+      color: var(--gold);
+      font-family: 'Arial', sans-serif;
+      display: block;
+    }
+
+    .growth-stat .desc {
+      font-size: .8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* ── Conclusion / Future ─────────────────────────── */
+    .future-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 36px;
+    }
+
+    .future-item {
+      text-align: center;
+      padding: 28px 20px;
+      border: 1px solid #dde3ea;
+      border-radius: var(--radius);
+      transition: border-color .2s, transform .2s;
+    }
+
+    .future-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .future-item .fi-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .future-item h3 {
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .future-item p {
+      font-size: .9rem;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    /* ── References ──────────────────────────────────── */
+    .ref-list {
+      list-style: none;
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .ref-list li {
+      padding: 16px 20px;
+      background: var(--light);
+      border-radius: 8px;
+      font-size: .92rem;
+      color: #3d5166;
+      border-left: 4px solid var(--accent);
+    }
+
+    .ref-list li strong {
+      color: var(--navy);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* ── Footer ──────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.55);
+      text-align: center;
+      padding: 40px 5%;
+      font-family: 'Arial', sans-serif;
+      font-size: .85rem;
+    }
+
+    footer .footer-name {
+      color: var(--gold);
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    footer p { margin-bottom: 4px; max-width: 100%; }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .callout { padding: 24px 20px; }
+      .growth-banner { padding: 32px 20px; }
+      .growth-stats { gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ──────────────────────────────────────── -->
+  <nav>
+    <div class="nav-brand">INTB 3355 &nbsp;|&nbsp; Leadership Reflection</div>
+    <ul class="nav-links">
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#initial">Initial Skills</a></li>
+      <li><a href="#learning">Learning</a></li>
+      <li><a href="#application">Application</a></li>
+      <li><a href="#growth">Growth</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ────────────────────────────────────────── -->
+  <section id="hero" class="full-width" style="max-width:100%; padding: 0;">
+    <div id="hero">
+      <div class="hero-tag">Website / Digital Tool Reflection</div>
+      <h1>Leading with <span>Presence</span>, Purpose &amp; Cultural Awareness</h1>
+      <p class="hero-sub">A reflection on leadership growth through INTB 3355   exploring style, influence, and cross-cultural intelligence.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="label">Student</div>
+          <div class="value">Alvin</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="label">Course</div>
+          <div class="value">INTB 3355</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="label">Semester</div>
+          <div class="value">Spring 2026</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="label">Focus</div>
+          <div class="value">Leadership &amp; Cross-Cultural Intelligence</div>
+        </div>
+      </div>
+      <div class="scroll-hint">Scroll to explore</div>
+    </div>
+  </section>
+
+  <!-- ── I. INTRODUCTION ─────────────────────────────── -->
+  <div id="intro">
+    <section>
+      <div class="section-tag">Section I</div>
+      <h2>Introduction to Leadership</h2>
+      <div class="section-rule"></div>
+
+      <p>Leadership has always been one of the most studied   and most misunderstood   forces in organizational life. We tend to think of leaders as people born with a gift: an innate charisma, a commanding presence, or a rare ability to inspire. But this course challenged me to question that assumption from day one.</p>
+
+      <p>Through INTB 3355, I was introduced to a more nuanced and evidence-based understanding of leadership   one rooted not in personality alone, but in deliberate behavior, adaptable style, and cross-cultural awareness. Leadership, I came to learn, is less about who you are and more about what you <em>do</em>, how you do it, and whether you can read the room well enough to adjust.</p>
+
+      <p>Three articles published in the <em>Harvard Business Review</em> anchored much of my reflection. The first, by Peterson, Abramson, and Stutman (2020), explores the science behind leadership style   introducing the concept of power and attractiveness markers and making the case that a truly blended style creates lasting presence. The second, by Wezowski (2018), examines how microexpressions and body language serve as a universal language, even when cultural norms vary dramatically across borders. The third, by Leinwand, Mani, and Sheppard (2022), zooms out from the individual to the collective   arguing that the future of leadership lies not in any single executive's capabilities, but in how leadership <em>teams</em> are built, focused, and made to function as a unified whole.</p>
+
+      <p>Together, these readings reshaped how I think about influence, communication, and my own development as a future business professional in an increasingly global world.</p>
+
+      <div class="article-grid">
+        <div class="article-card">
+          <div class="source">Harvard Business Review · 2020</div>
+          <h3>How to Develop Your Leadership Style</h3>
+          <div class="author">Peterson, Abramson &amp; Stutman</div>
+          <p>Introduces the spectrum of power vs. attractiveness markers and argues that a blended, dynamic leadership style is the hallmark of genuine executive presence.</p>
+          <div class="tag-list">
+            <span class="tag">Leadership Style</span>
+            <span class="tag">Presence</span>
+            <span class="tag">Power Markers</span>
+            <span class="tag">Soft Skills</span>
+          </div>
+        </div>
+        <div class="article-card">
+          <div class="source">Harvard Business Review · 2018</div>
+          <h3>How to Get Better at Reading People from Different Cultures</h3>
+          <div class="author">Kasia Wezowski</div>
+          <p>Demonstrates how microexpressions reveal universal emotions across cultures, and provides practical strategies for cross-cultural reading and communication.</p>
+          <div class="tag-list">
+            <span class="tag">Microexpressions</span>
+            <span class="tag">Body Language</span>
+            <span class="tag">Cross-Cultural</span>
+            <span class="tag">Empathy</span>
+          </div>
+        </div>
+        <div class="article-card">
+          <div class="source">Harvard Business Review · 2022</div>
+          <h3>Reinventing Your Leadership Team</h3>
+          <div class="author">Leinwand, Mani &amp; Sheppard</div>
+          <p>Argues that competing in a complex world demands transforming not just individual leaders but the entire C-suite   through diverse roles, collective ownership, and a bias toward transformation over maintenance.</p>
+          <div class="tag-list">
+            <span class="tag">Team Leadership</span>
+            <span class="tag">Transformation</span>
+            <span class="tag">Diversity</span>
+            <span class="tag">Collective Strategy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── II. INITIAL SKILLS ───────────────────────────── -->
+  <div id="initial" class="bg-light">
+    <section>
+      <div class="section-tag">Section II</div>
+      <h2>Reflection on Initial Soft Skills &amp; Leadership Abilities</h2>
+      <div class="section-rule"></div>
+
+      <p>Before this course began, I carried with me a fairly self-confident   though incomplete   picture of my leadership abilities. I was comfortable taking on group roles, speaking up in team settings, and presenting ideas in front of others. I also had a strong work ethic and a results-oriented mindset that often drove project success.</p>
+
+      <p>However, if I am being candid, my strengths were concentrated almost entirely in the <strong>task domain</strong>   the technical and organizational side of leadership   and much less in the <strong>relational domain</strong>. I was good at getting things done, but I was not always attuned to how my approach landed with others. I tended to use direct, declarative statements, often moved quickly past other perspectives in meetings, and rarely adjusted my communication style based on who I was speaking to.</p>
+
+      <p>Looking back through the framework introduced by Peterson et al. (2020), I would have placed myself firmly in the <em>lean powerful</em> category on the leadership style spectrum   relying heavily on power markers such as assertive statements, directness, and commanding pace, without enough counterbalance from attractiveness markers like empathy, inclusive language, and collaborative questions.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <span class="card-icon">💪</span>
+          <h3>Initial Strengths</h3>
+          <p>Strong task orientation, confidence in presenting ideas, ability to drive group projects, clear verbal communication, and comfort with structure and deadlines.</p>
+        </div>
+        <div class="card gold-top">
+          <span class="card-icon">🔍</span>
+          <h3>Areas for Improvement</h3>
+          <p>Limited flexibility in communication style, insufficient attention to nonverbal cues, tendency to favor statements over questions, and low cross-cultural reading ability.</p>
+        </div>
+        <div class="card green-top">
+          <span class="card-icon">🌐</span>
+          <h3>Cultural Awareness</h3>
+          <p>While I had some exposure to diverse peers, I lacked a systematic framework for reading and adapting to cultural differences in professional communication contexts.</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:40px;">
+        <p>"A great leadership style can make people appear more competent than they truly are, and a poor style can drag down a superior skill set."</p>
+        <cite>  Peterson, Abramson &amp; Stutman, HBR (2020)</cite>
+      </div>
+
+      <p>This quote hit home for me. I had assumed technical competence and a confident demeanor were enough. The research suggested otherwise   and I was ready to test that assumption over the course of the semester.</p>
+    </section>
+  </div>
+
+  <!-- ── III. LEARNING ────────────────────────────────── -->
+  <div id="learning">
+    <section>
+      <div class="section-tag">Section III</div>
+      <h2>Description of Learning Throughout the Course</h2>
+      <div class="section-rule"></div>
+
+      <p>The most transformative shift in my thinking this semester came from understanding that <strong>leadership style is not personality</strong>. Personality is relatively fixed   it is who you are at the core. But style is behavioral: it is what you do, how often, and when. That distinction opened up an entirely new space for intentional growth.</p>
+
+      <h3 style="font-size:1.2rem; color: var(--navy); margin: 28px 0 8px;">The Power–Attractiveness Spectrum</h3>
+
+      <p>Peterson et al. (2020) introduced me to the concept of <em>social markers</em>   the behavioral signals we send that communicate our status to others. These fall into two categories: <strong>power markers</strong> (associated with confidence, competence, and charisma, but also arrogance and intimidation) and <strong>attractiveness markers</strong> (associated with approachability and likability, but potentially with submissiveness if overused).</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <span class="card-icon">⚡</span>
+          <h3>Power Markers</h3>
+          <p>Interrupting to make a point, using declarative statements, setting an agenda, taking the head of the table, using intense and confident language, commanding pacing.</p>
+        </div>
+        <div class="card gold-top">
+          <span class="card-icon">🤝</span>
+          <h3>Attractiveness Markers</h3>
+          <p>Asking questions over making statements, using "we" and "our," holding doors, restating what others say, maintaining open body language, and expressing empathy.</p>
+        </div>
+        <div class="card green-top">
+          <span class="card-icon">⚖️</span>
+          <h3>The Blended Style</h3>
+          <p>The most effective leaders dynamically integrate both sets of markers   projecting confidence while remaining approachable. This is the hallmark of genuine "presence."</p>
+        </div>
+      </div>
+
+      <div class="insight-box" style="margin-top:36px;">
+        <div class="insight-icon">📌</div>
+        <div>
+          <h4>Key Insight from Peterson et al. (2020)</h4>
+          <p>True leadership presence is not about dominance OR warmth   it requires both simultaneously and dynamically. The same leader may need to project authority in one meeting and collaborative openness in the next. The ability to shift fluidly between these registers defines the elite performer.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.2rem; color: var(--navy); margin: 36px 0 8px;">Cross-Cultural Intelligence &amp; Microexpressions</h3>
+
+      <p>Wezowski (2018) opened a complementary dimension of leadership learning: how to <em>read</em> people accurately across cultural boundaries. In international business, leaders cannot assume that the body language norms of their home culture apply everywhere. What signals confidence in the United States may signal disrespect in Japan, or warmth in Brazil may come across as inappropriate familiarity in Qatar.</p>
+
+      <p>The key insight from Wezowski is that while <strong>body language is culturally variable</strong>, <strong>microexpressions are universal</strong>. These brief, involuntary flashes of facial expression   lasting only fractions of a second   reveal genuine emotion regardless of cultural background. A skilled leader learns to read these microexpressions to calibrate responses, detect misalignment, and build real trust across cultural divides.</p>
+
+      <div class="insight-box gold">
+        <div class="insight-icon">🌍</div>
+        <div>
+          <h4>Key Insight from Wezowski (2018)</h4>
+          <p>Body language is cultural, but emotions are universal. Microexpressions bypass cultural masking, offering leaders a direct window into how others truly feel. Developing this skill is a competitive advantage in global business contexts   especially in cultures where overt emotional expression is suppressed by social norms.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.2rem; color: var(--navy); margin: 36px 0 8px;">Cultural Variations in Leadership Style</h3>
+
+      <p>One of the most eye-opening sections of Peterson et al. (2020) was "The Culture Effect"   a discussion of how the same style marker carries different meanings in different cultural contexts. Eye contact, attire, note-taking behavior, and seating arrangements all function as status signals   but what they signal differs dramatically by geography and context.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-label">Eye Contact</div>
+          <h3>Culture-Dependent Status Signaling</h3>
+          <p>In the U.S., direct eye contact signals confidence. In Japan, it can be read as insubordinate. In Brazil, it signals appropriate deference. The behavior is the same; the meaning is not.</p>
+        </div>
+        <div class="timeline-item gold">
+          <div class="timeline-label">Attire</div>
+          <h3>Power Through Dress</h3>
+          <p>A tech founder wearing a t-shirt to meet investment bankers in the U.S. projects a power marker. In many African cultures, traditional tribal dress is the power marker. Context transforms meaning.</p>
+        </div>
+        <div class="timeline-item green">
+          <div class="timeline-label">Note-Taking</div>
+          <h3>Respect vs. Deference</h3>
+          <p>In the U.S., taking notes in senior meetings can seem overly deferential. In South Korea, not taking notes may be seen as disrespectful   as if you don't value what's being said.</p>
+        </div>
+      </div>
+      <h3 style="font-size:1.2rem; color: var(--navy); margin: 36px 0 8px;">Reinventing Leadership: From Individual to Collective</h3>
+
+      <p>While Peterson et al. and Wezowski focused on the individual leader, Leinwand, Mani, and Sheppard (2022) introduced me to a higher-level challenge: how do organizations <em>collectively</em> lead through transformation? Drawing on research at 12 prominent global firms   including Microsoft, Hitachi, and Philips   they identified six paradoxical skills that tomorrow's leaders must balance simultaneously:</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <span class="card-icon">🔭</span>
+          <h3>Strategic Executor</h3>
+          <p>No longer can a leader be either a visionary or an operator. Today's executives must be both   imagining the future and rolling up their sleeves to implement it.</p>
+        </div>
+        <div class="card gold-top">
+          <span class="card-icon">💻</span>
+          <h3>Tech-Savvy Humanist</h3>
+          <p>Leaders must harness technology while never losing sight of the people it serves   balancing digital fluency with deep empathy and human-centered thinking.</p>
+        </div>
+        <div class="card green-top">
+          <span class="card-icon">🌍</span>
+          <h3>Globally Minded Localist</h3>
+          <p>Effective leaders understand global forces but translate strategy through the lens of local culture, regulation, and community   as Philips's Carla Kriwet described her "United Nations" team.</p>
+        </div>
+        <div class="card purple-top">
+          <span class="card-icon">🦸</span>
+          <h3>Humble Hero</h3>
+          <p>Confidence and humility are not opposites in great leadership   they are partners. The best leaders lead boldly while remaining open to being challenged and proved wrong.</p>
+        </div>
+      </div>
+
+      <div class="insight-box" style="margin-top: 36px;">
+        <div class="insight-icon">🏛️</div>
+        <div>
+          <h4>Key Insight from Leinwand, Mani &amp; Sheppard (2022)</h4>
+          <p>Leadership transformation is not a solo act. CEOs must build teams that cover the full range of paradoxical leadership capabilities collectively   no single person needs to master every tension, but the team as a whole must. This shifts the focus from individual development to collective architecture: who is in the room, how they are focused, and whether they trust each other enough to lead boldly together.</p>
+        </div>
+      </div>
+
+      <p style="margin-top: 24px;">Particularly striking was the article's observation about team focus: the best leadership teams deliberately protect time for transformation, ensuring that urgent daily operations do not crowd out the important long-term priorities. As Philips's CEO Frans van Houten put it, the imperative is to "both perform and transform"   and holding both simultaneously is itself a leadership skill.</p>
+
+    </section>
+  </div>
+
+  <!-- ── IV. APPLICATION ──────────────────────────────── -->
+  <div id="application" class="bg-navy">
+    <section>
+      <div class="section-tag">Section IV</div>
+      <h2>Application of Learning in Practical Contexts</h2>
+      <div class="section-rule"></div>
+
+      <p>Understanding these concepts intellectually was one thing. Putting them into practice required deliberate effort   and exposed just how deeply ingrained my default behaviors were. Below are the key contexts in which I applied the course's lessons.</p>
+
+      <div class="card-grid">
+        <div class="card" style="background:#16213e; border-color:#2e86c1; color:rgba(255,255,255,.9);">
+          <span class="card-icon">🗣️</span>
+          <h3 style="color:#fff;">Group Project Communication</h3>
+          <p style="color:rgba(255,255,255,.72);">I began consciously incorporating partnership language   replacing "my idea" with "our direction" and "I think" with "what if we considered." Group members noted a shift toward more collaborative dynamics.</p>
+        </div>
+        <div class="card" style="background:#16213e; border-top-color:var(--gold); color:rgba(255,255,255,.9);">
+          <span class="card-icon">👀</span>
+          <h3 style="color:#fff;">Cross-Cultural Reading</h3>
+          <p style="color:rgba(255,255,255,.72);">While working with peers from different cultural backgrounds, I practiced scanning for microexpressions when verbal communication felt unclear   particularly subtle discomfort signals that I had previously missed.</p>
+        </div>
+        <div class="card" style="background:#16213e; border-top-color:#27ae60; color:rgba(255,255,255,.9);">
+          <span class="card-icon">🎤</span>
+          <h3 style="color:#fff;">Presentations &amp; Meetings</h3>
+          <p style="color:rgba(255,255,255,.72);">I experimented with "reading the room" before choosing my style approach   leaning powerful when establishing credibility with skeptical audiences, and leaning attractive when facilitating consensus-building sessions.</p>
+        </div>
+        <div class="card" style="background:#16213e; border-top-color:#8e44ad; color:rgba(255,255,255,.9);">
+          <span class="card-icon">🪞</span>
+          <h3 style="color:#fff;">Self-Monitoring</h3>
+          <p style="color:rgba(255,255,255,.72);">I began reviewing recorded presentations for my marker usage   tracking how often I made declarative statements vs. asked questions, and noting instances where my nonverbal behavior contradicted my intended message.</p>
+        </div>
+        <div class="card" style="background:#16213e; border-top-color:#e67e22; color:rgba(255,255,255,.9);">
+          <span class="card-icon">👥</span>
+          <h3 style="color:#fff;">Team Leadership Thinking</h3>
+          <p style="color:rgba(255,255,255,.72);">Inspired by Leinwand et al. (2022), I began approaching group projects not as collections of individual contributors but as small leadership teams   deliberately thinking about who covered which paradoxical capability and how to keep the group focused on the big goal, not just the task list.</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:44px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);">
+        <p>"She was known for her ability to 'disagree agreeably'   which helped her create unlikely friendships with more-conservative judges and foster loyal followership."</p>
+        <cite>  Peterson et al. (2020), on Justice Ruth Bader Ginsburg's blended leadership style</cite>
+      </div>
+
+      <div class="callout" style="margin-top:44px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);">
+        <p>"The only way to lead the company was to do the work I felt was required for the organization to move forward   not spend all day responding to what others provided."</p>
+        <cite>  CEO quoted in Leinwand, Mani &amp; Sheppard, HBR (2022)</cite>
+      </div>
+
+      <p>This quote from Leinwand et al. challenged me to think about my own tendencies in group settings   how often was I reacting to what others put in front of me, rather than proactively shaping the direction? Bringing a more transformation-oriented mindset to even small-scale team projects made me a noticeably more engaged and effective contributor.</p>
+
+      <p>The Ginsburg example resonated with me deeply. The ability to hold a strong conviction while remaining genuinely open and respectful is a rare combination   and one I began actively practicing in discussions where I disagreed with peers or had to advocate for a minority position.</p>
+
+      <p>Similarly, Wezowski's guidance on microexpression reading changed how I approach one-on-one conversations. Rather than focusing solely on what someone is saying, I started attending more closely to what their face is communicating in the half-second before they speak. This small behavioral shift has already improved my ability to sense misalignment early and adjust my approach accordingly.</p>
+    </section>
+  </div>
+
+  <!-- ── V. GROWTH ────────────────────────────────────── -->
+  <div id="growth">
+    <section>
+      <div class="section-tag">Section V</div>
+      <h2>Demonstration of New Skills &amp; Career / Personal Growth</h2>
+      <div class="section-rule"></div>
+
+      <p>The growth I experienced this semester was not dramatic or sudden   it was incremental, deliberate, and ongoing. But looking back at where I started versus where I stand now, the distance feels significant. Below I trace the key skills I have developed and how I plan to carry them forward.</p>
+
+      <div class="skills-grid">
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">Style Adaptability</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-before" style="width:35%;"></div>
+            <div class="progress-after" style="width:80%;"></div>
+          </div>
+          <div class="progress-labels"><span>Start of semester</span><span>End of semester</span></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">Cross-Cultural Reading</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-before" style="width:25%;"></div>
+            <div class="progress-after" style="width:72%;"></div>
+          </div>
+          <div class="progress-labels"><span>Start of semester</span><span>End of semester</span></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">Collaborative Language</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-before" style="width:30%;"></div>
+            <div class="progress-after" style="width:85%;"></div>
+          </div>
+          <div class="progress-labels"><span>Start of semester</span><span>End of semester</span></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">Microexpression Awareness</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-before" style="width:15%;"></div>
+            <div class="progress-after" style="width:65%;"></div>
+          </div>
+          <div class="progress-labels"><span>Start of semester</span><span>End of semester</span></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">Empathetic Listening</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-before" style="width:40%;"></div>
+            <div class="progress-after" style="width:78%;"></div>
+          </div>
+          <div class="progress-labels"><span>Start of semester</span><span>End of semester</span></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">"Reading the Room"</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-before" style="width:30%;"></div>
+            <div class="progress-after" style="width:75%;"></div>
+          </div>
+          <div class="progress-labels"><span>Start of semester</span><span>End of semester</span></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">Collective Leadership Thinking</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-before" style="width:20%;"></div>
+            <div class="progress-after" style="width:70%;"></div>
+          </div>
+          <div class="progress-labels"><span>Start of semester</span><span>End of semester</span></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">Transformation vs. Operations Balance</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-before" style="width:25%;"></div>
+            <div class="progress-after" style="width:68%;"></div>
+          </div>
+          <div class="progress-labels"><span>Start of semester</span><span>End of semester</span></div>
+        </div>
+      </div>
+
+      <div class="growth-banner">
+        <h2>The Blended Leader Emerges</h2>
+        <p>Moving from lean-powerful to a more dynamic, blended style was the defining arc of my semester. This shift does not mean losing conviction   it means gaining the full range needed to truly lead.</p>
+        <div class="growth-stats">
+          <div class="growth-stat">
+            <span class="num">3</span>
+            <span class="desc">HBR Articles Studied</span>
+          </div>
+          <div class="growth-stat">
+            <span class="num">5</span>
+            <span class="desc">Core Competencies Developed</span>
+          </div>
+          <div class="growth-stat">
+            <span class="num">1</span>
+            <span class="desc">Semester of Transformation</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.2rem; color: var(--navy); margin-bottom: 12px;">Looking Forward: Career Application</h3>
+      <p>The skills developed in INTB 3355 are not just academic   they map directly onto the demands of the international business environment I aim to enter. Whether I am managing a cross-cultural team, negotiating with partners from different regions, or presenting to senior stakeholders, the ability to read my audience and adapt my style in real time will be a differentiating advantage.</p>
+
+      <div class="future-grid">
+        <div class="future-item">
+          <span class="fi-icon">🌐</span>
+          <h3>Global Teams</h3>
+          <p>Apply microexpression and body language reading to navigate diverse team dynamics across cultures.</p>
+        </div>
+        <div class="future-item">
+          <span class="fi-icon">📊</span>
+          <h3>Executive Presence</h3>
+          <p>Deploy blended style markers to build credibility and followership with both junior and senior stakeholders.</p>
+        </div>
+        <div class="future-item">
+          <span class="fi-icon">🤜</span>
+          <h3>Negotiation</h3>
+          <p>Use cross-cultural intelligence to detect real sentiment beneath surface-level diplomatic communication.</p>
+        </div>
+        <div class="future-item">
+          <span class="fi-icon">🎯</span>
+          <h3>Mentorship</h3>
+          <p>Pass on these frameworks to future team members   helping others develop the blended style that drives genuine leadership.</p>
+        </div>
+        <div class="future-item">
+          <span class="fi-icon">🏗️</span>
+          <h3>Team Architecture</h3>
+          <p>Apply the Leinwand et al. framework when building or joining teams   ensuring diverse paradoxical capabilities are covered collectively and the group stays focused on transformation, not just operations.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── VI. CONCLUSION ───────────────────────────────── -->
+  <div id="conclusion" class="bg-light">
+    <section>
+      <div class="section-tag">Section VI</div>
+      <h2>Conclusion</h2>
+      <div class="section-rule"></div>
+
+      <p>When I entered INTB 3355, I believed leadership was primarily a matter of knowledge and results   that if you understood the subject matter and delivered outcomes, the rest would follow. This course respectfully but decisively challenged that assumption.</p>
+
+      <p>Leadership is, at its core, a communicative act. It happens in the space between people   in the words chosen, the pauses kept, the eye contact made or avoided, and the split-second expressions that pass across a face before a word is spoken. It is shaped by culture, filtered through bias, and magnified or diminished by the style of the person doing it.</p>
+
+      <p>Through the lens of Peterson, Abramson, and Stutman's research on power and attractiveness markers, I gained a precise vocabulary for understanding and improving my own leadership presence. Through Wezowski's work on microexpressions and cross-cultural body language, I developed a more sensitive and universal tool for reading the humans I am privileged to work alongside. And through Leinwand, Mani, and Sheppard's research on reinventing leadership teams, I came to understand that the highest form of leadership is not individual excellence   it is collective architecture: assembling diverse teams, focusing them on transformation, and building the trust that makes bold action possible.</p>
+
+      <p>The most important lesson I carry forward is this: <em>style is not fixed, and neither is leadership.</em> Like Vince Lombardi learning to walk the halls at night and sit with his players, like Ruth Bader Ginsburg mastering the art of disagreeing agreeably   the greatest leaders are those who remain students of the human experience and are always willing to adjust, grow, and lead differently when the situation demands it.</p>
+
+      <p>I leave this course not as a finished leader, but as a more intentional one.</p>
+
+      <div class="callout">
+        <p>"Dynamically integrating a broader range of powerful and attractive markers in everyday interactions can make a big difference in how we are perceived."</p>
+        <cite>  Peterson, Abramson &amp; Stutman, HBR (2020)</cite>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── REFERENCES ───────────────────────────────────── -->
+  <div>
+    <section>
+      <div class="section-tag">References</div>
+      <h2>Sources &amp; Readings</h2>
+      <div class="section-rule"></div>
+      <ul class="ref-list">
+        <li>
+          <strong>Peterson, S. J., Abramson, R., &amp; Stutman, R. K. (2020).</strong>
+          How to develop your leadership style. <em>Harvard Business Review, 98</em>(6), 66–74. (November–December 2020 Issue)
+        </li>
+        <li>
+          <strong>Wezowski, K. (2018, September 18).</strong>
+          How to get better at reading people from different cultures. <em>Harvard Business Review.</em>
+        </li>
+        <li>
+          <strong>Wengelnik, C. (2020).</strong>
+          SHORT &amp; SWEET   How to compose effective introductions and conclusions for written and oral communication. Open-Source Publication.
+        </li>
+        <li>
+          <strong>Wengelnik, C. (2020).</strong>
+          SHORT &amp; SWEET   How to master soft skills. Open-Source Publication.
+        </li>
+        <li>
+          <strong>Leinwand, P., Mani, M. M., &amp; Sheppard, B. (2022, January–February).</strong>
+          Reinventing your leadership team. <em>Harvard Business Review.</em> Adapted from <em>Beyond Digital: How Great Leaders Transform Their Organizations and Shape the Future</em> (Harvard Business Review Press, 2021).
+        </li>
+        <li>
+          <strong>Cuddy, A. J. C., Fiske, S. T., &amp; Glick, P. (2008).</strong>
+          Warmth and competence as universal dimensions of social perception: The stereotype content model and the BIAS map. <em>Advances in Experimental Social Psychology, 40</em>, 61–149.
+        </li>
+        <li>
+          <strong>Maraniss, D. (1999).</strong>
+          <em>When pride still mattered: A life of Vince Lombardi.</em> Simon &amp; Schuster.
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- ── FOOTER ───────────────────────────────────────── -->
+  <footer>
+    <div class="footer-name">Alvin</div>
+    <p>Website / Digital Tool Reflection &nbsp;·&nbsp; INTB 3355 &nbsp;·&nbsp; Spring 2026</p>
+    <p style="margin-top:10px; font-size:.75rem;">Topic: Leading with Presence, Purpose &amp; Cultural Awareness</p>
+  </footer>
+
+</body>
+</html>
